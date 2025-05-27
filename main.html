@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jayansh - Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('back.jpg') no-repeat center center/cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .button-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 48%;
+    }
+
+    .btn {
+      display: block;
+      padding: 15px;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00c6ff;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00c6ff;
+    }
+
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .cart-icon:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    .cart-icon img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cart-content {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      width: 80%;
+      max-width: 500px;
+      position: relative;
+      color: #fff;
+      text-align: center;
+    }
+
+    .cart-content h2 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #00c6ff;
+    }
+
+    .cart-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart-content li {
+      font-size: 1em;
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .cart-content .total {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #00c6ff;
+    }
+
+    .checkout-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00c6ff;
+    }
+
+    .checkout-btn:hover {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00c6ff;
+    }
+
+    .close-cart {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .close-cart:hover {
+      color: #00c6ff;
+    }
+
+    .contact-section {
+      position: fixed;
+      bottom: 30px;
+      right: 10px;
+      text-align: right;
+      z-index: 10;
+    }
+
+    .contact-section p {
+      font-size: 0.8em;
+      color: #ccc;
+      margin-bottom: 5px;
+    }
+
+    .social-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social-btn {
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      color: #ccc;
+      font-size: 0.7em;
+      font-weight: normal;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 15px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: #ccc;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .made-by {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      font-size: 0.8em;
+      color: #ccc;
+      z-index: 10;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Image -->
+  <div class="background"></div>
+  <div class="overlay"></div>
+
+  <!-- Cart Icon -->
+  <div class="cart-icon" onclick="showCart()">
+    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart">
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+      <span class="close-cart" onclick="hideCart()">×</span>
+      <h2>Your Cart</h2>
+      <ul id="cartItems"></ul>
+      <div class="total" id="cartTotal">Total: ₹0</div>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="card">
+      <h1>Welcome</h1>
+      <div class="button-grid">
+        <div class="column">
+          <a href="bio.html" class="btn">BIO</a>
+          <a href="projects.html" class="btn">PROJECTS</a>
+        </div>
+        <div class="column">
+          <a href="courses.html" class="btn">COURSES</a>
+          <a href="tools.html" class="btn">TOOLS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact-section">
+    <p>If having any query feel free to ask</p>
+    <div class="social-buttons">
+      <a href="https://www.instagram.com/a_lonely_ooo" target="_blank" class="social-btn">Instagram</a>
+      <a href="https://t.me/a_lonely_ooo" target="_blank" class="social-btn">TeleG. 1</a>
+      <a href="https://t.me/a_lonely_ooo2" target="_blank" class="social-btn">TeleG. 2</a>
+      <a href="https://t.me/a_lonely_ooo3" target="_blank" class="social-btn">TeleG. 3</a>
+      <a href="https://twitter.com/a_lonely_ooo" target="_blank" class="social-btn">Twitter</a>
+    </div>
+  </div>
+
+  <!-- Made By -->
+  <div class="made-by">Made by @a_lonely_ooo</div>
+
+  <footer>© 2025 @a_lonely_ooo. All rights reserved.</footer>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} - ₹${item.price}`;
+      cartItems.appendChild(li);
+      total += item.price;
+    });
+
+    cartTotal.textContent = `Total: ₹${total}`;
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  function showCart() {
+    updateCart();
+    document.getElementById('cartModal').style.display = 'flex';
+  }
+
+  function hideCart() {
+    document.getElementById('cartModal').style.display = 'none';
+  }
+
+  function checkout() {
+    alert('Proceeding to checkout...');
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+    hideCart();
+  }
+</script>
+</body>
+</html>
