@@ -6,7 +6,451 @@
   <title>Jayansh - Projects</title>
   <style>
     * {
+      margin: 0;<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jayansh - Projects</title>
+  <style>
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      background-image: url('back.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: -1;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .navbar .home-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00c6ff;
+    }
+
+    .navbar .home-btn:hover {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00c6ff;
+    }
+
+    .navbar .search-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .search-container input {
+      padding: 8px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px 0 0 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 0.9em;
+      outline: none;
+    }
+
+    .navbar .search-container button {
+      padding: 8px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .navbar .search-container button:hover {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      box-shadow: 0 0 10px #00c6ff;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 100px 20px 60px 20px;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .project-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      text-align: left;
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+
+    .project-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .project-item h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #00c6ff;
+    }
+
+    .project-item p {
+      font-size: 1em;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .project-item img {
+      max-width: 450px;
+      max-height: 300px;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      cursor: pointer;
+    }
+
+    .project-item a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00c6ff;
+    }
+
+    .project-item a:hover {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00c6ff;
+    }
+
+    /* Custom styling for Discuss a Project link */
+    .discuss-project {
+      color: #333; /* Dark text color for contrast */
+      text-decoration: none; /* Remove underline */
+      text-align: center; /* Center the text inside the button */
+    }
+
+    .discuss-project:hover {
+      color: #333; /* Keep text color on hover */
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00c6ff;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 15px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: #ccc;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .made-by {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      font-size: 0.8em;
+      color: #ccc;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .custom-ui-container {
+      position: fixed;
+      bottom: 30px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 0.7em;
+      color: #ccc;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .custom-ui-container.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .custom-ui-text {
+      margin-right: 8px;
+    }
+
+    .custom-ui-btn {
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #ccc;
+      font-size: 0.7em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+    }
+
+    .custom-ui-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Lightbox styles for viewing images */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #00c6ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="main.html" class="home-btn">Home</a>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search projects..." />
+      <button onclick="searchProjects()">Search</button>
+    </div>
+  </div>
+
+  <div class="overlay"></div>
+
+  <!-- Content -->
+  <div class="container" id="projectContainer">
+    <div class="card">
+      <h1>My Projects</h1>
+      <div class="project-list" id="projectList">
+        <!-- Sample Project 1 -->
+        <div class="project-item">
+          <h2>Worm AI (In Progress)</h2>
+          <img src="proj1.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj2.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj3.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj4.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj5.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <p>• A highly powerfull and complex AI coded in Python. Almost an uncencred ai. Ask Anything from it. </p>
+          <p><b>• Nature:</b><i> casual, attitude and frank nature even if you misbehave with it it will not give response of your</i></p>
+          <p>• Currently in progress adding as many features I can Like- voice chat, image generation and now trying to add media in live chat </p>
+          <p>• If you wanna buy private api and prompt contact me!</p>
+          <a href="https://github.com/a-lonely-ooo/portfolio" target="_blank">View Project</a>
+        </div>
+        <!-- Sample Project 2 -->
+        <div class="project-item">
+          <h2>Project 2: Python Automation Bot</h2>
+          <img src="project2.jpg" alt="Python Automation Bot" onclick="openLightbox(this.src)" />
+          <p>A Python-based automation bot for streamlining repetitive tasks, integrated with Telegram for remote control and notifications.</p>
+          <a href="https://github.com/a-lonely-ooo/automation-bot" target="_blank">View Project</a>
+        </div>
+        <!-- Add more projects here -->
+      </div>
+
+      <a href="https://t.me/a_lonely_ooo" class="project-item discuss-project" style="display: inline-block; margin-top: 30px;">Discuss a Project with Me</a>
+    </div>
+
+    <footer>© 2025 @a_lonely_ooo. All rights reserved.</footer>
+  </div>
+
+  <!-- Made By -->
+  <div class="made-by">Made by @a_lonely_ooo</div>
+
+  <!-- Custom UI Container -->
+  <div class="custom-ui-container" id="customUiContainer">
+    <span class="custom-ui-text">If you also want to make your custom Page</span>
+    <a href="https://t.me/a_lonely_ooo" target="_blank" class="custom-ui-btn">Click me</a>
+  </div>
+
+  <!-- Lightbox for viewing images -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
+    <img id="lightbox-img" src="" alt="Lightbox Image" />
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('projectContainer');
+    const customUiContainer = document.getElementById('customUiContainer');
+
+    // Scroll detection for custom UI container
+    container.addEventListener('scroll', () => {
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight;
+      const clientHeight = container.clientHeight;
+      // Show container when scrolled to bottom (within 10px)
+      if (scrollHeight - scrollTop - clientHeight < 10) {
+        customUiContainer.classList.add('visible');
+      } else {
+        customUiContainer.classList.remove('visible');
+      }
+    });
+  });
+
+  // Lightbox functionality
+  function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = src;
+    lightbox.classList.add('active');
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+  }
+
+  // Close lightbox when clicking outside the image
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id !== 'lightbox-img') {
+      closeLightbox();
+    }
+  });
+
+  // Search functionality
+  function searchProjects() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const projectList = document.getElementById('projectList');
+    const projects = projectList.getElementsByClassName('project-item');
+
+    for (let i = 0; i < projects.length; i++) {
+      const project = projects[i];
+      const title = project.getElementsByTagName('h2')[0].textContent.toLowerCase();
+      const description = project.getElementsByTagName('p')[0].textContent.toLowerCase();
+
+      if (title.includes(input) || description.includes(input)) {
+        project.style.display = '';
+      } else {
+        project.style.display = 'none';
+      }
+    }
+  }
+
+  // Trigger search on Enter key
+  document.getElementById('searchInput').addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      searchProjects();
+    }
+  });
+</script>
+</body>
+</html>
       padding: 0;
       box-sizing: border-box;
     }
