@@ -32,7 +32,6 @@
       z-index: -1;
     }
 
-    /* Navigation Bar */
     .navbar {
       position: fixed;
       top: 0;
@@ -56,7 +55,7 @@
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 0 10px #00c6ff;
-      margin-right: auto; /* Pushes Home button to the left */
+      margin-right: auto;
     }
 
     .navbar .home-btn:hover {
@@ -164,25 +163,18 @@
       margin-bottom: 15px;
     }
 
-    .project-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 15px;
-    }
-
     .project-item img {
-      max-width: 100%;
-      max-height: 200px;
+      max-width: 450px;
+      max-height: 300px;
       width: auto;
       height: auto;
       border-radius: 10px;
+      margin-bottom: 15px;
       border: 1px solid rgba(255, 255, 255, 0.2);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
       cursor: pointer;
-      object-fit: cover;
-      flex: 1 1 calc(33.33% - 10px);
-      max-width: calc(33.33% - 10px);
     }
 
     .project-item a {
@@ -302,7 +294,6 @@
       max-height: 80%;
       border-radius: 10px;
       border: 2px solid rgba(255, 255, 255, 0.3);
-      object-fit: contain;
     }
 
     .lightbox.active {
@@ -323,7 +314,6 @@
       color: #00c6ff;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       .card {
         padding: 20px;
@@ -339,13 +329,12 @@
       }
 
       .project-item img {
-        flex: 1 1 100%;
         max-width: 100%;
-        max-height: 150px;
+        max-height: 200px;
       }
 
       .navbar {
-        flex-direction: row; /* Keep horizontal for better layout */
+        flex-direction: row;
         justify-content: space-between;
         padding: 10px 15px;
       }
@@ -379,13 +368,11 @@
       <div class="project-list" id="projectList">
         <div class="project-item">
           <h2>Worm AI (In Progress)</h2>
-          <div class="project-gallery">
-            <img src="proj1.png" alt="Worm AI" onclick="openLightbox(this.src)" />
-            <img src="proj2.png" alt="Worm AI" onclick="openLightbox(this.src)" />
-            <img src="proj3.png" alt="Worm AI" onclick="openLightbox(this.src)" />
-            <img src="proj4.png" alt="Worm AI" onclick="openLightbox(this.src)" />
-            <img src="proj5.png" alt="Worm AI" onclick="openLightbox(this.src)" />
-          </div>
+          <img src="proj1.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj2.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj3.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj4.png" alt="Worm AI" onclick="openLightbox(this.src)" />
+          <img src="proj5.png" alt="Worm AI" onclick="openLightbox(this.src)" />
           <p>• A highly powerful and complex AI coded in Python. Almost an uncensored AI. Ask anything from it.</p>
           <p><b>• Nature:</b><i> Casual, attitude, and frank nature, even if you misbehave with it, it will not respond to your behavior.</i></p>
           <p>• Currently in progress, adding as many features as possible, like voice chat, image generation, and now trying to add media in live chat.</p>
@@ -394,11 +381,33 @@
         </div>
         <div class="project-item">
           <h2>Project 2: Python Automation Bot</h2>
-          <div class="project-gallery">
-            <img src="project2.jpg" alt="Python Automation Bot" onclick="openLightbox(this.src)" />
-          </div>
+          <img src="project2.jpg" alt="Python Automation Bot" onclick="openLightbox(this.src)" />
           <p>A Python-based automation bot for streamlining repetitive tasks, integrated with Telegram for remote control and notifications.</p>
           <a href="https://github.com/a-lonely-ooo/automation-bot" target="_blank">View Project</a>
+        </div>
+        <div class="project-item">
+          <h2>Project 3: Task Manager App</h2>
+          <img src="project3.jpg" alt="Task Manager App" onclick="openLightbox(this.src)" />
+          <p>A web-based task management application built with JavaScript and Node.js, featuring real-time updates and user authentication.</p>
+          <a href="https://github.com/a-lonely-ooo/task-manager" target="_blank">View Project</a>
+        </div>
+        <div class="project-item">
+          <h2>Project 4: Chat Application</h2>
+          <img src="project4.jpg" alt="Chat Application" onclick="openLightbox(this.src)" />
+          <p>A real-time chat application using WebSocket and React, supporting group chats and private messaging.</p>
+          <a href="https://github.com/a-lonely-ooo/chat-app" target="_blank">View Project</a>
+        </div>
+        <div class="project-item">
+          <h2>Project 5: E-Commerce Platform</h2>
+          <img src="project5.jpg" alt="E-Commerce Platform" onclick="openLightbox(this.src)" />
+          <p>An e-commerce platform built with Django and PostgreSQL, featuring product listings, cart, and payment integration.</p>
+          <a href="https://github.com/a-lonely-ooo/ecommerce-platform" target="_blank">View Project</a>
+        </div>
+        <div class="project-item">
+          <h2>Project 6: Portfolio Generator</h2>
+          <img src="project6.jpg" alt="Portfolio Generator" onclick="openLightbox(this.src)" />
+          <p>A tool to generate customizable portfolio websites using HTML, CSS, and JavaScript with a user-friendly interface.</p>
+          <a href="https://github.com/a-lonely-ooo/portfolio-generator" target="_blank">View Project</a>
         </div>
       </div>
       <a href="https://t.me/a_lonely_ooo" class="discuss-project">Discuss a Project with Me</a>
@@ -438,6 +447,19 @@
     if (scrollHeight <= clientHeight + 50) {
       customUiContainer.classList.add('visible');
     }
+
+    // Preload images to check for loading issues
+    const images = document.querySelectorAll('.project-item img');
+    images.forEach(img => {
+      const src = img.src;
+      img.onerror = () => {
+        console.error(`Failed to load image: ${src}`);
+        img.alt = `Image not found: ${src}`;
+      };
+      img.onload = () => {
+        console.log(`Loaded image: ${src}`);
+      };
+    });
   });
 
   function openLightbox(src) {
